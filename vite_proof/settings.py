@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-2=vg#!20ijlg&h^072&jk@*bfj0i^!r#bwnb(zwx_%(m1mef$0"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 CORS_ALLOWED_ORIGINS = ["http://localhost:8000", "http://127.0.0.1:8000"]
@@ -25,6 +25,8 @@ INSTALLED_APPS = [
     "django_vite",
     "client",
     "corsheaders",
+    "server",
+    "rest_framework"
 ]
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -130,3 +132,11 @@ CSRF_COOKIE_SAMESITE = "Strict"
 SESSION_COOKIE_SAMESITE = "Strict"
 CSRF_COOKIE_HTTPONLY = False  # this is crap
 SESSION_COOKIE_HTTPONLY = True
+
+# DRF
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.AllowAny'
+    ]
+}
