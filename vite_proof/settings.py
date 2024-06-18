@@ -104,11 +104,9 @@ STATIC_URL = "static/"
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 
-DIST = BASE_DIR / "client" / "dist"
-
 STATICFILES_DIRS = [
     (BASE_DIR / "client/public"),
-    (BASE_DIR / "client/dist"),
+    ("client", BASE_DIR / "client/dist"),
 ]
 
 if not DEBUG:
@@ -117,6 +115,7 @@ if not DEBUG:
 DJANGO_VITE = {
     "default": {
         "dev_mode": DEBUG,
+        "static_url_prefix": "client",
         "manifest_path": "./client/dist/.vite/manifest.json",
     }
 }
