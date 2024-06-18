@@ -6,7 +6,7 @@ import { resolve } from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/static/",
+  base: "/static/client/",
   build: {
     manifest: true,
     outDir: resolve("./dist"),
