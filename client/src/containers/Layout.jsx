@@ -2,16 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 const { Header, Content, Footer } = Layout;
-const items = new Array(3).fill(null).map((_, index) => ({
-  key: index + 1,
-  label: `nav ${index + 1}`,
-}));
+
 const BasicLayout = (props) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   const navigate = useNavigate();
+
+  const items = [{label: 'Articles', key:'articles', onClick: () => navigate(`/`)}, {label: 'Login', key:'login'}]
 
   return (
     <Layout>
@@ -25,7 +24,7 @@ const BasicLayout = (props) => {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={['2']}
+          defaultSelectedKeys={['articles']}
           items={items}
           style={{
             flex: 1,

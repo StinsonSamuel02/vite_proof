@@ -1,26 +1,37 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Button, Form, Input, Radio } from 'antd';
 
-const BasicForm = ({ requestMethod, articleID }) => {
+import Axios from '../queries/axios';
+
+const BasicForm = ({ requestMethod, articleID, onFormSubmit, btnText }) => {
 
     const handleFormSubmit = (values) => {
 
         switch (requestMethod) {
             case 'post':
-                axios.post('http://127.0.0.1:8000/server/articles/', {
+                Axios.post('/articles/', {
                     title: values.title,
                     text: values.text
                 })
-                .then(res => console.log(res))
+                .then(res => {
+                    console.log(res)
+                    if (onFormSubmit) {
+                        onFormSubmit(res); // Notifica al componente padre sobre el éxito de la operación
+                    }
+                })
                 .catch(err => console.log(err));
                 break;
             case 'put':
-                axios.put(`http://127.0.0.1:8000/server/articles/${articleID}`, {
+                Axios.put(`/articles/${articleID}/`, {
                         title: values.title,
                         text: values.text
                     })
-                    .then(res => console.log(res))
+                    .then(res => {
+                        console.log(res)
+                        if (onFormSubmit) {
+                            onFormSubmit(res); // Notifica al componente padre sobre el éxito de la operación
+                        }
+                    })
                     .catch(err => console.log(err));
                 break;
         }
@@ -81,7 +92,7 @@ const BasicForm = ({ requestMethod, articleID }) => {
       </Form.Item>
 
       <Form.Item {...buttonItemLayout}>
-        <Button type="primary" htmlType='submit'>Post</Button>
+        <Button type="primary" htmlType='submit'>{btnText}</Button>
       </Form.Item>
 
     </Form>
